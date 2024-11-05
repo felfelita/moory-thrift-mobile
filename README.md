@@ -1,16 +1,36 @@
-# moory_thrift
+# Tugas 7
+**1. Jelaskan apa yang dimaksud dengan stateless widget dan stateful widget, dan jelaskan perbedaan dari keduanya**
 
-A new Flutter project.
+**Stateless Widget**
 
-## Getting Started
+Stateless widget adalah widget yang tidak dapat berubah atau mengubahnya sendiri. Contoh widget stateless di Flutter adalah:
+- Icon
+- Text  
+- Container
+- Padding
+- SizedBox
 
-This project is a starting point for a Flutter application.
+Karakteristik stateless widget:
+- Tidak memiliki keadaan (state) yang dapat berubah
+- Build methodnya selalu sama setiap kali dipanggil
+- Tidak memiliki metode setState()
 
-A few resources to get you started if this is your first Flutter project:
+**Stateful Widget**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Stateful widget adalah widget yang dapat berubah atau mengubah dirinya sendiri. Contoh widget stateful di Flutter adalah:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Checkbox
+- Radio Button
+- Slider
+- TextField
+- Form
+
+Karakteristik stateful widget:
+- Memiliki keadaan (state) yang dapat berubah
+- Build methodnya mungkin akan berbeda-beda setiap kali dipanggil
+- Memiliki metode setState() untuk meminta rebuild
+
+Perbedaan utama antara keduanya:
+1. Mampu berubah: Stateful bisa berubah, stateless tidak
+2. Metode setState(): Hanya ada di stateful
+3. Lifecycle: Stateful memiliki lifecycle yang lebih kompleks
