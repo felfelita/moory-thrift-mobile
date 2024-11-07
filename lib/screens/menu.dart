@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:moory_thrift/screens/thriftentry_form.dart';
+import 'package:moory_thrift/widgets/left_drawer.dart';
+import 'package:moory_thrift/widgets/card_product.dart';
 
 class MyHomePage extends StatelessWidget {
     MyHomePage({super.key});
@@ -6,7 +9,7 @@ class MyHomePage extends StatelessWidget {
     final String name = 'Felita Zahra'; // Nama
     final String className = 'PBP C'; // Kelas
     final List<ItemHomepage> items = [
-         ItemHomepage("Lihat Daftar Produk", Icons.mood),
+         ItemHomepage("Lihat Daftar Produk", Icons.list),
          ItemHomepage("Tambah Produk", Icons.add),
          ItemHomepage("Logout", Icons.logout),
     ];
@@ -23,8 +26,10 @@ class MyHomePage extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
+          iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: const Color(0xFF8B4513), // Warna cokelat tanah
         ),
+        drawer: const LeftDrawer(),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -134,7 +139,15 @@ class ItemCard extends StatelessWidget {
             ..showSnackBar(
               SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
             );
-        },
+          if (item.name == "Tambah Produk") {
+            Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ThriftEntryFormPage(),
+                      ),
+                    );
+                  }
+          },
         child: Container(
           padding: const EdgeInsets.all(8),
           child: Center(
