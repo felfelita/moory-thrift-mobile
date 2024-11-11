@@ -21,7 +21,7 @@ class _ThriftEntryFormPageState extends State<ThriftEntryFormPage> {
       appBar: AppBar(
         title: const Center(
           child: Text(
-            'Form Tambah Thrift Kamu Hari ini',
+            'Jual apa hari ini',
           ),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
