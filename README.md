@@ -1,4 +1,4 @@
-# Tugas 
+# Tugas 7
 
 # 1. Jelaskan apa yang dimaksud dengan stateless widget dan stateful widget, dan jelaskan perbedaan dari keduanya
 
@@ -179,5 +179,82 @@
 8. Tambahkan warna khusus pada masing-masing tombol.
 9. Lakukan `git add`, `commit`, dan `push` untuk menyimpan perubahan ke repository.
 
+# Tugas 8
 
+# Apa kegunaan const di Flutter? Jelaskan apa keuntungan ketika menggunakan const pada kode Flutter. Kapan sebaiknya kita menggunakan const, dan kapan sebaiknya tidak digunakan?
+**Kegunaan const di Flutter**
+Const dalam Flutter digunakan untuk membuat objek statis yang tidak dapat diubah setelah pembuatan. 
+**Keuntungannya antara lain:**
+- Optimasi performansi: Flutter dapat melakukan optimasi yang lebih baik untuk objek konstan.
+- Pengurangan memori: Objek konstan tidak perlu disimpan dalam heap.
+- Tidak ada risiko ubahnya nilai secara acak atau tidak diharapkan.
 
+**Gunakan const ketika:**
+- Membuat widget statis yang tidak akan berubah.
+- Menyediakan nilai default untuk properti widget.
+- Membuat fungsi yang selalu mengembalikan hasil yang sama.
+
+Jangan gunakan const jika nilai dapat berubah atau bergantung pada kondisi runtime.
+
+# Jelaskan dan bandingkan penggunaan Column dan Row pada Flutter. Berikan contoh implementasi dari masing-masing layout widget ini!
+**Penggunaan Column dan Row**
+Column dan Row adalah widget layout dasar di Flutter yang digunakan untuk mengatur widget secara vertikal atau horizontal.
+
+**Perbandingan Column dan Row**
+**Orientasi:**
+- Column: Mengatur widget secara vertikal dari atas ke bawah.
+- Row: Mengatur widget secara horizontal dari kiri ke kanan.
+**Properti utama:**
+- Column: mainAxisAlignment dan crossAxisAlignment
+- Row: mainAxisAlignment dan crossAxisAlignment
+**Contoh implementasi:**
+Column(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  children: [
+    Text('Top'),
+    Text('Middle'),
+    Text('Bottom'),
+  ],
+);
+
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  children: [
+    Icon(Icons.home),
+    Icon(Icons.settings),
+    Icon(Icons.person),
+  ],
+);
+# Sebutkan apa saja elemen input yang kamu gunakan pada halaman form yang kamu buat pada tugas kali ini. Apakah terdapat elemen input Flutter lain yang tidak kamu gunakan pada tugas ini? Jelaskan!
+Pada halaman form saya, elemen input yang digunakan adalah:
+- **TextFormField untuk Nama Produk (_productName)**
+Untuk menginput nama produk dengan validator agar tidak kosong.
+- **TextFormField untuk Kondisi Produk (_condition)**
+Untuk menginput kondisi produk, misalnya "New" atau "Used", dengan validator agar tidak kosong.
+- **TextFormField untuk Deskripsi (_description)**
+Untuk menginput deskripsi produk dengan validator agar tidak kosong.
+- **TextFormField untuk Harga (_price)**
+Untuk menginput harga dengan validator agar tidak kosong dan harus angka.
+- **ElevatedButton untuk Tombol Simpan**
+Untuk menyimpan data setelah validasi dan menampilkan dialog konfirmasi.
+Elemen Input Lain yang Tidak Digunakan:
+- **DropdownButtonFormField**: Cocok untuk pilihan terbatas seperti kondisi produk.
+- **Checkbox** / Radio: Untuk input pilihan biner, seperti persetujuan.
+- **Switch**: Untuk opsi aktif/nonaktif.
+- **Slider**: Untuk input nilai dalam rentang tertentu, seperti harga atau ukuran.
+**DatePicker** / TimePicker: Untuk input tanggal atau waktu jika diperlukan.
+# Bagaimana cara kamu mengatur tema (theme) dalam aplikasi Flutter agar aplikasi yang dibuat konsisten? Apakah kamu mengimplementasikan tema pada aplikasi yang kamu buat?
+Untuk mengatur tema (theme) dalam aplikasi Flutter agar tampilannya konsisten, saya menggunakan properti ThemeData pada MaterialApp di main.dart. Dengan menggunakan tema global ini, saya dapat menyesuaikan warna, font, dan gaya elemen UI di seluruh aplikasi, sehingga tampilan aplikasi tetap seragam/konsisten di semua halaman dan widget.
+
+Pada aplikasi ini, saya sudah menerapkan tema sebagian besar dengan warna konsisten seperti pada:
+- **AppBar** menggunakan warna cokelat (Color(0xFF8B4513)).
+- **InfoCard** menggunakan warna beige lembut untuk latar belakang, sedangkan ItemCard menggunakan warna cokelat muda untuk menjaga konsistensi.
+- **Tombol dan teks** juga memanfaatkan warna dari tema yang diatur di AppBar atau tombol, sehingga aplikasi tampak seragam.
+# Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
+Dalam menangani navigasi, saya menggunakan beberapa method yang umum digunakan, yaitu:
+- **Pop (pop())**
+Menghapus rute yang sedang aktif (rute paling atas) dari stack Navigator. Hal ini membuat aplikasi kembali ke rute yang ada di bawahnya dalam stack, yang kemudian akan tampil di layar.
+- **Push Replacement (pushReplacement())**
+Mengganti rute aktif dengan rute baru tanpa menambah rute lama ke dalam stack. Rute yang sedang ditampilkan akan dihapus dari stack dan langsung digantikan dengan rute baru, tanpa memengaruhi elemen-elemen rute lain yang ada di bawahnya pada stack.
+- **Push (push())**
+Menambahkan sebuah rute baru ke dalam stack yang dikelola oleh Navigator sehingga rute baru tersebut akan berada di paling atas stack dan otomatis tampil pada layar pengguna.
