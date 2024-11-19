@@ -351,3 +351,5 @@ Dengan demikian, data dari input dapat efisien diproses dan ditampilkan pada UI 
    - Token dihapus dari SharedPreferences.
    - Server Django menghapus cookie JWT.
 Dengan demikian, proses autentikasi melibatkan interaksi antara Flutter sebagai klien dan Django sebagai server, dengan JWT sebagai metode autentikasi yang aman dan efisien.
+
+**Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).**
