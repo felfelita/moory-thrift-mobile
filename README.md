@@ -258,3 +258,96 @@ Menghapus rute yang sedang aktif (rute paling atas) dari stack Navigator. Hal in
 Mengganti rute aktif dengan rute baru tanpa menambah rute lama ke dalam stack. Rute yang sedang ditampilkan akan dihapus dari stack dan langsung digantikan dengan rute baru, tanpa memengaruhi elemen-elemen rute lain yang ada di bawahnya pada stack.
 - **Push (push())**
 Menambahkan sebuah rute baru ke dalam stack yang dikelola oleh Navigator sehingga rute baru tersebut akan berada di paling atas stack dan otomatis tampil pada layar pengguna.
+
+
+# Tugas 9
+
+**Jelaskan mengapa kita perlu membuat model untuk melakukan pengambilan ataupun pengiriman data JSON? Apakah akan terjadi error jika kita tidak membuat model terlebih dahulu?**
+
+**Kebutuhan Membuat Model untuk Data JSON**
+1. Struktur Data Konsisten
+   - Memastikan struktur data yang dikirimkan atau diterima selalu sesuai dengan yang diharapkan.
+2. Validasi Otomatis
+   - Melakukan validasi otomatis terhadap struktur dan tipe data.
+3. Efisiensi Pengolongan Data
+   - Memungkinkan pengolongan data yang lebih efisien.
+4. Konsistensi Antar Sistem
+   - Memastikan konsistensi struktur data antar sistem.
+
+**Dampak Tidak Membuat Model**
+1. Kesalahan Parsing
+   - Data yang tidak sesuai struktur dapat menyebabkan kesalahan parsing.
+2. Kesulitan Akses Data
+   - Struktur data tidak konsisten membuat sulit mengakses data.
+3. Kesalahan Validasi Data
+   - Sulit memastikan data memenuhi kriteria validasi.
+4. Performa Buruk
+   - Pengolongan data tidak efisien mempengaruhi performa aplikasi.
+5. Keamanan Data Lemah
+   - Risiko data tidak valid atau berbahaya dapat masuk ke sistem.
+Membuat model untuk data JSON sangat penting untuk memastikan konsistensi, efisiensi, dan keamanan data selama proses pengiriman dan penerimaan data JSON.
+
+**Jelaskan fungsi dari library http yang sudah kamu implementasikan pada tugas ini**
+Fungsi dari library HTTP adalah:
+
+1. Memungkinkan konfigurasi perangkat sebagai klien HTTP untuk mengirimkan permintaan ke server dan memparse respons.
+2. Memungkinkan definisi fungsi panggilan balik untuk menangani respons HTTP.
+3. Memberikan akses ke informasi penting dari respons HTTP seperti status kode dan isi tubuh.
+4. Membuat proses pengiriman dan parsing respons HTTP menjadi lebih mudah dan terstruktur.
+Dengan demikian, library ini memfasilitasi pengembangan klien HTTP dengan menyediakan struktur data yang tepat, fungsi parsing, dan API untuk mengirimkan dan menerima permintaan/respons HTTP secara efisien.
+
+**Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.**
+**Fungsi CookieRequest**
+- Mengelola cookies HTTP dalam permintaan dan respons.
+- Menyimpan dan mengirimkan cookies HTTP.
+- Mengatur header cookie pada permintaan HTTP.
+- Memproses cookies yang dikirimkan bersama dengan respons HTTP.
+- Pengiriman Instance CookieRequest
+**Mengapa instance CookieRequest perlu dibagikan ke semua komponen di aplikasi Flutter?**
+- Konsistensi State: Memastikan semua komponen memiliki akses ke informasi cookies yang sama dan terkini.
+- Efisiensi: Menghindari pembuatan instance CookieRequest yang berbeda-beda di setiap komponen.
+- Manajemen Global: Memungkinkan pengelolaan cookies secara global di seluruh aplikasi.
+- Akses Sederhana: Memudahkan akses ke fungsi CookieRequest dari mana saja di aplikasi.
+- Kompabilitas dengan Sistem State Management: Bisa digunakan dengan sistem manajemen state seperti Provider atau BLoC.
+Dengan membagikan instance CookieRequest ke semua komponen, aplikasi dapat memiliki manajemen cookies yang konsisten dan efisien di seluruh sistem.
+
+**Jelaskan mekanisme pengiriman data mulai dari input hingga dapat ditampilkan pada Flutter.**
+1. Input Data:
+   - Pengguna memasukkan data melalui widget input seperti TextField.
+2. Pengolahan Data:
+   - Data diproses dan diubah format sesuai.
+3. State Management:
+   - Data disuplai ke state management solution seperti setState atau Provider.
+4. Update UI:
+   - Flutter mengupdate widget yang terpengaruh secara otomatis.
+5. Rendering:
+   - Widget dirender ulang dengan data baru.
+6. Display:
+   - Data akhir ditampilkan pada UI melalui widget sesuai.
+7. Networking (opsional):
+   - Jika perlu, data dikirim ke server dan diperoleh respons.
+8. Error Handling:
+   - Flutter menghandle kesalahan dan memberi feedback kepada pengguna.
+Dengan demikian, data dari input dapat efisien diproses dan ditampilkan pada UI Flutter melalui mekanisme state management yang efektif.
+
+
+**Jelaskan mekanisme autentikasi dari login, register, hingga logout. Mulai dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.**
+1. Input Data:
+   - Pengguna memasukkan data login/register melalui widget input di Flutter.
+2. Pengolahan di Flutter:
+   - Data dikirim ke server Django melalui HTTP request.
+   - JWT token diperoleh dari respons server.
+3. Pengolahan di Django:
+   - Server verifikasi kredensial.
+   - JWT token dibuat dan dikirimkan kembali ke Flutter.
+4. Autentikasi:
+   - Flutter menyimpan JWT token secara aman.
+   - Token digunakan untuk autentikasi setiap request selanjutnya.
+5. Tampilnya Menu:
+   - Flutter memeriksa apakah token masih valid.
+   - Jika valid, UI diupdate untuk menampilkan menu yang sesuai.
+6. Logout:
+   - Pengguna mengakses fitur logout di Flutter.
+   - Token dihapus dari SharedPreferences.
+   - Server Django menghapus cookie JWT.
+Dengan demikian, proses autentikasi melibatkan interaksi antara Flutter sebagai klien dan Django sebagai server, dengan JWT sebagai metode autentikasi yang aman dan efisien.
