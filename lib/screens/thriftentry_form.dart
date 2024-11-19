@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:moory_thrift/screens/menu.dart';
 import 'package:moory_thrift/widgets/left_drawer.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class ThriftEntryFormPage extends StatefulWidget {
   const ThriftEntryFormPage({super.key});
@@ -13,10 +18,11 @@ class _ThriftEntryFormPageState extends State<ThriftEntryFormPage> {
   String _productName = "";
   String _condition = "";
   String _description = "";
-  double _price = 0.0;
+  int _price = 0;
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -117,20 +123,21 @@ class _ThriftEntryFormPageState extends State<ThriftEntryFormPage> {
                   keyboardType: TextInputType.number,
                   onChanged: (String? value) {
                     setState(() {
-                      _price = double.tryParse(value!) ?? 0.0;
+                      _price = int.tryParse(value!) ?? 0;
                     });
                   },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
                       return "Price cannot be empty!";
                     }
-                    if (double.tryParse(value) == null) {
+                    if (int.tryParse(value) == null) {
                       return "Price must be a valid number!";
                     }
                     return null;
                   },
                 ),
               ),
+
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
@@ -140,38 +147,38 @@ class _ThriftEntryFormPageState extends State<ThriftEntryFormPage> {
                       backgroundColor: MaterialStateProperty.all(
                           Theme.of(context).colorScheme.primary),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text('Thrift berhasil tersimpan'),
-                              content: SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Name of Product: $_productName'),
-                                    Text('Condition: $_condition'),
-                                    Text('Description: $_description'),
-                                    Text('Price: \$_${_price.toStringAsFixed(2)}'),
-                                  ],
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  child: const Text('OK'),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    _formKey.currentState!.reset();
-                                  },
-                                ),
-                              ],
-                            );
-                          },
+                          // Kirim ke Django dan tunggu respons
+                        final response = await request.postJson(
+                            "http://127.0.0.1:8000/create-flutter/",
+                            jsonEncode(<String, dynamic>{
+                                'name': _productName,
+                                'price': _price,  // Price sebagai integer
+                                'description': _description,
+                                'condition': _condition,
+                            }),
                         );
+                       if (context.mounted) {
+                              if (response['status'] == 'success') {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                  content: Text("Thrift baru berhasil disimpan!"),
+                                  ));
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => MyHomePage()),
+                                  );
+                              } else {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                      content:
+                                          Text("Terdapat kesalahan, silakan coba lagi."),
+                                  ));
+                              }
+                          }
                       }
-                    },
+                  },
                     child: const Text(
                       "Save",
                       style: TextStyle(color: Colors.white),

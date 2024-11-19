@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moory_thrift/screens/list_thriftentry.dart';
 import 'package:moory_thrift/screens/menu.dart';
 import 'package:moory_thrift/screens/thriftentry_form.dart';
 
@@ -52,8 +53,7 @@ class LeftDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.add),
-              title: const Text('Tambah Mood'),
-              // Bagian redirection ke MoodEntryFormPage
+              title: const Text('Tambah Produk'),
               onTap: () {
                 Navigator.push(
                 context,
@@ -62,6 +62,16 @@ class LeftDrawer extends StatelessWidget {
                 ));
             },
             ),
+            ListTile(
+              leading: const Icon(Icons.list),
+              title: const Text('Daftar Produk'),     
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const ThriftEntryPage()),
+                );
+            },         
+            )
         ],
       ),
     );

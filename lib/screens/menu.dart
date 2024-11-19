@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moory_thrift/screens/thriftentry_form.dart';
 import 'package:moory_thrift/widgets/left_drawer.dart';
-import 'package:moory_thrift/widgets/card_product.dart';
 
 class MyHomePage extends StatelessWidget {
     MyHomePage({super.key});
