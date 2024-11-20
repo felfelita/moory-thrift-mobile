@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moory_thrift/models/thrift_entry.dart';
 import 'package:moory_thrift/widgets/left_drawer.dart';
+import 'package:moory_thrift/screens/detail_thrift.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -14,10 +15,10 @@ class ThriftEntryPage extends StatefulWidget {
 class _ThriftEntryPageState extends State<ThriftEntryPage> {
   Future<List<ThriftEntry>> fetchThrift(CookieRequest request) async {
     final response = await request.get('http://127.0.0.1:8000/json/');
-    
+
     // Melakukan decode response menjadi bentuk json
     var data = response;
-    
+
     // Melakukan konversi data json menjadi object ThriftEntry
     List<ThriftEntry> listThrift = [];
     for (var d in data) {
@@ -55,30 +56,45 @@ class _ThriftEntryPageState extends State<ThriftEntryPage> {
             } else {
               return ListView.builder(
                 itemCount: snapshot.data!.length,
-                itemBuilder: (_, index) => Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "${snapshot.data![index].fields.name}",
-                        style: const TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                itemBuilder: (_, index) => GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ThriftEntryDetailPage(item: snapshot.data![index]),
                       ),
-                      Text("Rp.${snapshot.data![index].fields.price},00"),
-                      const SizedBox(height: 10),
-                      const SizedBox(height: 10),
-                      Text("${snapshot.data![index].fields.description}"),
-                      const SizedBox(height: 10),
-                      Text("${snapshot.data![index].fields.condition}"),
-                      const SizedBox(height: 10),
-                      Text("${snapshot.data![index].fields.time}")
-                    ],
+                    );
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    padding: const EdgeInsets.all(20.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8.0),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 6.0,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${snapshot.data![index].fields.name}",
+                          style: const TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text("Rp.${snapshot.data![index].fields.price},00"),
+                        const SizedBox(height: 10),
+                        Text("${snapshot.data![index].fields.description}"),
+                      ],
+                    ),
                   ),
                 ),
               );
