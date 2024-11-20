@@ -353,3 +353,23 @@ Dengan demikian, data dari input dapat efisien diproses dan ditampilkan pada UI 
 Dengan demikian, proses autentikasi melibatkan interaksi antara Flutter sebagai klien dan Django sebagai server, dengan JWT sebagai metode autentikasi yang aman dan efisien.
 
 **Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).**
+1. **Membuat Aplikasi Django untuk Otentikasi**  
+   Saya mulai dengan membuat aplikasi Django bernama **authentication** yang khusus menangani fitur otentikasi pengguna.  
+
+2. **Mengimplementasikan Fitur Otentikasi**  
+   Saya membuat beberapa fitur utama:  
+   - **Registrasi**: untuk menambahkan pengguna baru.  
+   - **Login**: untuk mengautentikasi pengguna yang sudah terdaftar.  
+   - **Logout**: untuk mengakhiri sesi pengguna yang sedang aktif.  
+
+3. **Mengintegrasikan Backend Django dengan Flutter**  
+   Setelah itu, saya menghubungkan API otentikasi Django ke aplikasi Flutter, sehingga Flutter bisa memproses permintaan pengguna yang sedang login.  
+
+4. **Membuat Model JSON Kustom**  
+   Saya mendesain model JSON kustom di backend Django untuk memastikan data yang dikirim atau diterima sesuai dengan kebutuhan aplikasi Flutter.  
+
+5. **Mengintegrasikan Model dengan Form di Flutter**  
+   Model JSON yang saya buat saya hubungkan dengan form di aplikasi Flutter, sehingga form dapat berinteraksi langsung dengan data backend.  
+
+6. **Mengambil Data dari Backend**  
+   Saya menggunakan dependensi HTTP di Flutter untuk melakukan proses **fetching data** dari backend Django. Data ini kemudian saya gunakan untuk menampilkan informasi atau menjalankan fungsi tertentu di aplikasi Flutter.  
